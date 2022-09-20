@@ -1,0 +1,35 @@
+---
+- hosts: elkstack
+  remote_user: root
+  become: yes
+  become_user: root
+  roles:
+  - { role: java }
+
+- hosts: elasticsearch
+  remote_user: root
+  become: yes
+  become_user: root
+  roles:
+  - { role: elasticsearch }
+
+- hosts: kibana
+  remote_user: root
+  become: yes
+  become_user: root
+  roles:
+  - { role: kibana }
+
+- hosts: logstash
+  remote_user: root
+  become: yes
+  become_user: root
+  roles:
+  - { role: logstash }
+
+- hosts: metricbeat
+  remote_user: root
+  become: yes
+  become_user: root
+  roles:
+  - { role: metricbeat }

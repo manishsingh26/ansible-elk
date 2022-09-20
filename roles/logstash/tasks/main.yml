@@ -1,0 +1,33 @@
+#
+# Installing Logstash
+#
+
+# Add Logstash apt key
+- name: Add Logstash apt key
+  apt_key:
+    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+
+# Installing APT repository
+- name: Install APT repositery
+  apt:
+    name: apt-transport-https
+    state: present
+
+# Add the Logstash apt repo
+- name: Adding Logstash Repo
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+
+# Install Logstash
+- name: Install Logstash
+  apt:
+    name: logstash
+    update_cache: yes
+
+# Start Logstash
+- name: Start Logstash
+  service:
+    name: logstash
+    state: started

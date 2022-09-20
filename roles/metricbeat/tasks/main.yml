@@ -1,0 +1,33 @@
+#
+# Installing Metricbeat
+#
+
+# Add Metricbeat apt key
+- name: Add Metricbeat apt key
+  apt_key:
+    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+
+# Installing APT repository
+- name: Install APT repositery
+  apt:
+    name: apt-transport-https
+    state: present
+
+# Add the Metricbeat apt repo
+- name: Adding Metricbeat Repo
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+
+# Install Metricbeat
+- name: Install Metricbeat
+  apt:
+    name: metricbeat
+    update_cache: yes
+
+# Start Metricbeat
+- name: Start Metricbeat
+  service:
+    name: metricbeat
+    state: started

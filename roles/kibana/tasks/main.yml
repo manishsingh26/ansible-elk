@@ -1,0 +1,33 @@
+#
+# Installing Kibana
+#
+
+# Add Kibana apt key
+- name: Add Kibana apt key
+  apt_key:
+    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+
+# Installing APT repository
+- name: Install APT repositery
+  apt:
+    name: apt-transport-https
+    state: present
+
+# Add the Kibana apt repo
+- name: Adding Kibana Repo
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+
+# Install Kibana
+- name: Install Kibana
+  apt:
+    name: kibana
+    update_cache: yes
+
+# Start Kibana
+- name: Start Kibana
+  service:
+    name: kibana
+    state: started
