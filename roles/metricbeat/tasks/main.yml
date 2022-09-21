@@ -26,6 +26,34 @@
     name: metricbeat
     update_cache: yes
 
+# Update Metricbeat YML comment elastic
+- name: Updating Metricbeat YML comment elastic
+  lineinfile:
+    destfile: /etc/metricbeat/metricbeat.yml
+    regexp: "output.elasticsearch:"
+    line: "# output.elasticsearch:"
+
+# Update Metricbeat YML comment elastic host
+- name: Updating Metricbeat YML comment elastic host
+  lineinfile:
+    destfile: /etc/metricbeat/metricbeat.yml
+    regexp: "localhost:9200"
+    line: '  #hosts: ["localhost:9200"]'
+
+# Update Metricbeat YML uncomment logstash
+- name: Updating Metricbeat YML uncomment logstash
+  lineinfile:
+    destfile: /etc/metricbeat/metricbeat.yml
+    regexp: "output.logstash:"
+    line: "output.logstash:"
+
+# Update Metricbeat YML uncomment logstash host
+- name: Updating Metricbeat YML uncomment logstash host
+  lineinfile:
+    destfile: /etc/metricbeat/metricbeat.yml
+    regexp: "localhost:5044"
+    line: '  hosts: ["192.168.1.34:5044"]'
+
 # Start Metricbeat
 - name: Start Metricbeat
   service:

@@ -11,25 +11,27 @@
   become: yes
   become_user: root
   roles:
-  - { role: elasticsearch }
+  - { role: elasticsearch, tags: elasticsearch }
 
 - hosts: kibana
   remote_user: root
   become: yes
   become_user: root
   roles:
-  - { role: kibana }
+  - { role: kibana, tags: kibana }
 
 - hosts: logstash
   remote_user: root
   become: yes
   become_user: root
   roles:
-  - { role: logstash }
+  - { role: logstash, tags: logstash }
 
 - hosts: metricbeat
   remote_user: root
   become: yes
   become_user: root
   roles:
-  - { role: metricbeat }
+  - { role: metricbeat, tags: metricbeat }
+
+

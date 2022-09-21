@@ -26,6 +26,27 @@
     name: kibana
     update_cache: yes
 
+# Update Kibana YML config port
+- name: Updating network host config
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: "server.port:"
+    line: "server.port: 5602"
+
+# Update Kibana YML config host
+- name: Updating network host config
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: "server.host:"
+    line: 'server.host: "0.0.0.0"'
+
+# Update Kibana YML config add elastic details
+- name: Updating network host config
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: "elasticsearch.hosts:"
+    line: 'elasticsearch.hosts: ["http://192.168.1.32:9200"]'
+
 # Start Kibana
 - name: Start Kibana
   service:

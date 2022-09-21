@@ -26,6 +26,38 @@
     name: logstash
     update_cache: yes
 
+# Configure Logstash
+- name: Configure Logstash YML
+  copy: 
+    dest: "/etc/logstash/conf.d/server_metric.conf"
+    content: |
+      input {
+        beats {
+          port => 5044
+         }
+      }
+
+      output {
+        elasticsearch {
+          hosts => ["http://192.168.1.32:9200"]
+          index => "metricbeat" 
+       }
+      }
+
+# Update Logstash YML API http host
+- name: Updating network API http host
+  lineinfile:
+    destfile: /etc/logstash/logstash.yml
+    regexp: "api.http.host:"
+    line: "api.http.host: 0.0.0.0"
+
+# Update Kibana YML API http port
+- name: Updating network API http port
+  lineinfile:
+    destfile: /etc/logstash/logstash.yml
+    regexp: "api.http.port:"
+    line: 'api.http.port: 9600'
+
 # Start Logstash
 - name: Start Logstash
   service:
