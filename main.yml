@@ -33,5 +33,3 @@
   become_user: root
   roles:
   - { role: metricbeat, tags: metricbeat }
-
-
